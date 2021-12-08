@@ -28,9 +28,6 @@
       },
       "kind" : "Instance",
       "identification" : {
-        "@variables" : {
-          "idprefix" : "http://demo.org/sm/"
-        },
         "idType" : "Iri",
         "@bind" : {
           "id" : {

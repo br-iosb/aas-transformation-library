@@ -3,7 +3,11 @@
 	<ns:submodel id="submodelID_A">
 	</ns:submodel>
 	<ns:submodel id="submodelID_B">
+		<ns:element>SINGLE_ELEMENT</ns:element>
 	</ns:submodel>
 	<ns:submodel id="submodelID_C">
+		<ns:element>MORE_ELEMENTS_1</ns:element>
+		<ns:element>MORE_ELEMENTS_2</ns:element>
+		<ns:element>MORE_ELEMENTS_3</ns:element>
 	</ns:submodel>
 </ns:root>

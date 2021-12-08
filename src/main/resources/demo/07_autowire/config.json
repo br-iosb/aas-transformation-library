@@ -20,6 +20,7 @@
       },
       "idShort" : "Test_AssetAdministrationShell"
     } ],
+    "conceptDescriptions" : [ ],
     "submodels" : [ {
       "modelType" : {
         "name" : "Submodel"

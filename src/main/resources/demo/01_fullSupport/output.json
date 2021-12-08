@@ -220,9 +220,6 @@
       },
       "dataSpecificationContent" : {
         "value" : "TEST",
-        "symbol" : "SU",
-        "dataType" : "RealMeasure",
-        "unit" : "SpaceUnit",
         "unitId" : {
           "keys" : [ {
             "value" : "http://acplt.org/Units/SpaceUnit",
@@ -230,8 +227,7 @@
             "idType" : "Iri"
           } ]
         },
-        "valueFormat" : "string",
-        "sourceOfDefinition" : "http://acplt.org/DataSpec/ExampleDef",
+        "symbol" : "SU",
         "valueList" : {
           "valueReferencePairTypes" : [ {
             "value" : "http://acplt.org/ValueId/ExampleValueId",
@@ -253,6 +249,10 @@
             }
           } ]
         },
+        "valueFormat" : "string",
+        "unit" : "SpaceUnit",
+        "dataType" : "RealMeasure",
+        "sourceOfDefinition" : "http://acplt.org/DataSpec/ExampleDef",
         "definition" : [ {
           "language" : "de",
           "text" : "Dies ist eine Data Specification fÃ¼r Testzwecke"
@@ -260,13 +260,7 @@
           "language" : "en-us",
           "text" : "This is a DataSpecification for testing purposes"
         } ],
-        "shortName" : [ {
-          "language" : "de",
-          "text" : "Test Spec"
-        }, {
-          "language" : "en-us",
-          "text" : "TestSpec"
-        } ],
+        "levelType" : [ "Min", "Max" ],
         "preferredName" : [ {
           "language" : "de",
           "text" : "Test Specification"
@@ -274,7 +268,13 @@
           "language" : "en-us",
           "text" : "TestSpecification"
         } ],
-        "levelType" : [ "Min", "Max" ]
+        "shortName" : [ {
+          "language" : "de",
+          "text" : "Test Spec"
+        }, {
+          "language" : "en-us",
+          "text" : "TestSpec"
+        } ]
       }
     } ],
     "administration" : {

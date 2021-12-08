@@ -34,7 +34,20 @@
         "idShort" : {
           "@xpath" : "@id"
         }
-      }
+      },
+      "submodelElements" : [ {
+        "@foreach" : {
+          "@xpath" : "ns:element"
+        },
+        "modelType" : {
+          "name" : "Property"
+        },
+        "@bind" : {
+          "idShort" : {
+            "@xpath" : "text()"
+          }
+        }
+      } ]
     } ]
   }
 }
