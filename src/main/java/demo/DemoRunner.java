@@ -1,6 +1,5 @@
 package demo;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,7 +39,7 @@ public class DemoRunner {
 	public static void main(String[] args) throws Exception {
 		for (String scenarioName : SCENARIOS) {
 
-			// use scanrios subfolder
+			// use scenarios subfolder
 			Path demoSpace = Paths.get("src/main/resources/demo").toAbsolutePath();
 			Path execDir = demoSpace.resolve(scenarioName);
 

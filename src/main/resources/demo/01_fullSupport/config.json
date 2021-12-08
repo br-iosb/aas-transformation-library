@@ -1667,7 +1667,11 @@
           "idShort" : "ExampleBlob",
           "description" : [ {
             "language" : "en-us",
-            "text" : "Example Blob object"
+            "@bind" : {
+              "text" : {
+                "@concatenate" : [ "Example ", "Blob ", "object" ]
+              }
+            }
           }, {
             "language" : "de",
             "text" : "Beispiel Blob Element"
