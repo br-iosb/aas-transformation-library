@@ -111,7 +111,7 @@ public class MappingSpecificationParser {
         mapper = JsonMapper.builder()
             .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
             // fail on unknown properties for now
-            // .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .annotationIntrospector(new ReflectionAnnotationIntrospector() {
                 public TypeResolverBuilder<?> findTypeResolver(MapperConfig<?> config, AnnotatedClass ac, JavaType baseType) {
                     if (ReflectionHelper.SUBTYPES.containsKey(ac.getRawType())) {
