@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuration | aas-transformation-library Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuration | aas-transformation-library Documentation ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/adminshellio-48x48.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
+
+<p>Asset Administration Shells are instantiated using the basic structure determined in the AAS-JSON specification.
+However, there are a variety of tools that ease the writing process.</p>
+<h2 id="expressions">Expressions</h2>
+<p>Expressions are bottom-level-objects denoted by a <code>@</code> at the beginning of the json-key and signify a side-effect during
+runtime. While those configurations with no expression in their context are just parsed as AAS-JSON, expressions are
+evaluated with their result determining the structure of the resulting AAS objects. Examples include:</p>
+<ul>
+<li><code>@xpath</code> for evaluation of xPath-Queries</li>
+<li><code>@caexAttributeName</code> to fetch the attribute name of an element in a AutomationML file. Takes a string.</li>
+<li><code>@uaBrowsePath</code> gets a Node's NodeId by its BrowsePath from a OPC UA nodeset file. Takes a list
+of <a href="https://reference.opcfoundation.org/Core/docs/Part3/5.2.4/">BrowseNames</a>
+connected by hierarchical ReferenceTypes. This is called the <code>BrowsePath</code> in OPC UA.</li>
+<li><code>@uaChildren</code> takes a BrowsePath (see above) and returns all Nodes that are connected to this node via a hierarchical
+ReferenceType.</li>
+<li>Several basic mathematical and boolean operations such as <code>@plus</code>,<code>@times</code>,<code>@max</code>,<code>@negate</code> or <code>@and</code>.</li>
+</ul>
+<p>Please note that Expressions can only be called from within a <code>@bind</code>- or <code>@foreach</code>-context.</p>
+<h2 id="looping-with-foreach">Looping with <code>@foreach</code></h2>
+<p>On every level (except for the <code>aasEnvironmentMapping</code>) objects can be dynamically generated using this feature. It
+evaluates the expression and builds objects according to the statements below - once for every returned value. The
+syntax is as follows:</p>
+<pre><code class="lang-json">{
+  &quot;@foreach&quot;: {
+    &quot;@xpath&quot;: &quot;someXpath&quot;
+  },
+  &quot;xyz&quot;: &quot;abc&quot;
+}
+</code></pre>
+<h2 id="dynamic-evaluation-with-bind">Dynamic evaluation with <code>@bind</code></h2>
+<p>Looping around the results of an expression would be obsolete if all resulting objects would hold the same values.
+That's why the @bind Context allows to fill AAS-attributes with the result of an expression. It may only return a single
+value that will be used. If I wanted to configure changing idShorts based on the iterator, it could look like this:</p>
+<pre><code class="lang-json">{
+  &quot;@foreach&quot;: {
+    &quot;@xpath&quot;: &quot;someXpathQuery&quot;
+  },
+  &quot;@bind&quot;: {
+    &quot;idShort&quot;: {
+      &quot;@xpath&quot;: &quot;somePotentiallyRelativeXpathQuery&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="pre-defined-expressions-with-definitions">Pre-defined Expressions with <code>@definitions</code></h2>
+<p>Usually in the <code>@header</code> (but everywhere else is fine as well), the config can define more complex functions that will
+then be called using the <code>@def</code>-key in the <code>@bind</code>-context.In the example below, the <code>exampleFunction</code> is called to
+assign an id to an AAS.</p>
+<pre><code class="lang-json">{
+  &quot;@headers&quot;: {
+    &quot;@definitions&quot;: {
+      &quot;exampleFunction&quot;: {
+        &quot;@concatenate&quot;: [
+          {
+            &quot;@xpath&quot;: &quot;someXpath&quot;
+          },
+          &quot;/&quot;,
+          {
+            &quot;@xpath&quot;: &quot;someOtherXpath&quot;
+          }
+        ]
+      }
+    }
+  },
+  &quot;aasEnvironmentMapping&quot;: {
+    ...,
+    &quot;assetAdministrationShells&quot;: {
+      &quot;identification&quot;: {
+        &quot;@bind&quot;: {
+          &quot;id&quot;: {
+            &quot;@def&quot;: &quot;exampleFunction&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h1 id="structure-of-the-config-json-file">Structure of the config-json file</h1>
+<p>The configuration file describes how the AAS file should be generated.
+See <a href="src/test/resources/config/simpleConfig.json">this config file</a> for an example.</p>
+<h2 id="header"><code>@header</code></h2>
+<p>The header sets a couple of circumstances for the transformation.</p>
+<ul>
+<li><code>aasVersion</code> indicates the version of the meta-model that a given config-file is created for. This matters since the
+objects and their json-serialization vary greatly with each version.</li>
+<li><code>@definitions</code> defines that name and content of the pre-defined expressions (see above) that can later be called
+with <code>@def</code></li>
+<li><code>@variables</code> allows the user to define values that can be bound to a variable, updated with another <code>@variables</code>
+statement and dereferenced by <code>@var</code>, each in a <code>@bind</code>-context</li>
+<li><code>@namespaces</code> passes namespaces that the DOM4J xPath-Engine needs to successfully evaluate queries on a given XML
+document.</li>
+<li><code>@parameters</code> are fixed value variable that will be replaced after the whole transformation and can be set by the
+caller during runtime. They are dereferenced by <code>@var</code> as well.</li>
+</ul>
+<h2 id="building-asset-administration-shell-environments-with-the-aasenvironmentmapping">Building Asset Administration Shell Environments with the <code>aasEnvironmentMapping</code></h2>
+<p>The library generates a single AAS Environment for every config-file. The structure of the config-file is as follows.</p>
+<pre><code class="lang-json">{
+  &quot;@header&quot;: {
+    &quot;aasVersion&quot;: &quot;3.0RC01&quot;,
+    &quot;@namespaces&quot;: {},
+    &quot;@definitions&quot;: {},
+    &quot;@variables&quot;: {},
+    &quot;@parameters&quot;: {}
+  },
+  &quot;aasEnvironmentMapping&quot;: [
+    {
+      &quot;assetAdministrationShells&quot;: [],
+      &quot;assets&quot;: [],
+      &quot;submodels&quot;: [],
+      &quot;conceptDescriptions&quot;: []
+    }
+  ]
+}
+</code></pre>
+<p>This structure looks familiar because everything in the &quot;aasEnvironmentMapping&quot; holds the same structure as the JSON-
+serialization of AAS. This is supported both to reuse the syntax as well as improve maintainability and parsability of
+the config-JSON files.</p>
+<h3 id="assetadministrationshells">AssetAdministrationShells</h3>
+<pre><code class="lang-json">{
+  &quot;@foreach&quot;: {
+    &quot;@xpath&quot;: &quot;some-xPath-Query that may return multiple results&quot;
+  },
+  &quot;idShort&quot;: &quot;someIdShort&quot;,
+  &quot;identification&quot;: {
+    &quot;idType&quot;: &quot;Iri&quot;,
+    &quot;id&quot;: &quot;someIri&quot;
+  },
+  &quot;assetInformation&quot;: {
+    ...
+  }
+}
+</code></pre>
+<p>In the above case all AAS would hold the same idShort and identification which is semantically wrong but can be avoided
+using the <code>@bind</code> operator. Please note that the AAS' <code>submodels:</code>-key holding references to submodel objects is omitted
+in the config-file since its contents (References to Submodels in the <code>&quot;submodels&quot;:[]</code> section are generated
+automatically.</p>
+<h3 id="assets">Assets</h3>
+<p>Configuring Assets is optional in the transformation library, just like it's optional in the AAS in general.</p>
+<pre><code class="lang-json">{
+  &quot;assets&quot;: [
+    {
+      &quot;identification&quot;: {
+        &quot;id&quot;: &quot;Iri&quot;,
+        &quot;idType&quot;: &quot;SomeIri&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 id="submodels">Submodels</h3>
+<p>An AAS Submodel are generated in the <code>submodels</code>-section and use expressions the same way as explained before. An
+example:</p>
+<pre><code class="lang-json">{
+  &quot;submodels&quot;: [
+    {
+      &quot;@foreach&quot;: {
+        &quot;@xpath&quot;: &quot;caex:Attribute[@Name='CommercialData']/caex:Attribute[@Name='ManufacturerDetails']&quot;
+      },
+      &quot;semanticId&quot;: {
+        &quot;keys&quot;: [
+          {
+            &quot;value&quot;: &quot;https://admin-shell.io/zvei/nameplate/1/0/Nameplate&quot;,
+            &quot;idType&quot;: &quot;Iri&quot;,
+            &quot;type&quot;: &quot;Submodel&quot;
+          }
+        ]
+      },
+      &quot;identification&quot;: {
+        &quot;id&quot;: &quot;_submodel1&quot;,
+        &quot;idType&quot;: &quot;Custom&quot;
+      },
+      &quot;submodelElements&quot;: [
+        {
+          &quot;semanticId&quot;: {
+            &quot;keys&quot;: [
+              {
+                &quot;value&quot;: &quot;0173-1#02-AAO677#002&quot;,
+                &quot;idType&quot;: &quot;Irdi&quot;,
+                &quot;type&quot;: &quot;SubmodelElement&quot;
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>SubmodelElements are added into the submodels as defined by the json-spec.</p>
+<h3 id="concept-descriptions">Concept Descriptions</h3>
+<p>Concept Descriptions are supported and can be built using the same toolbox of expressions, definitions, variables and
+control statements like @bind and @foreach.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/br-iosb/aas-transformation-library/blob/5e8eb88d5d42bc22c570c8e440ef4b89b26f637e/docs/articles/configuration.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
