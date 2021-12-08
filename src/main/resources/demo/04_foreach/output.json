@@ -8,9 +8,9 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_A_fromXML"
+      "id" : "http://demo.org/sm/submodelID_A"
     },
-    "idShort" : "submodelID_A_fromXML"
+    "idShort" : "submodelID_A"
   }, {
     "modelType" : {
       "name" : "Submodel"
@@ -18,9 +18,15 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_B_fromXML"
+      "id" : "http://demo.org/sm/submodelID_B"
     },
-    "idShort" : "submodelID_B_fromXML"
+    "idShort" : "submodelID_B",
+    "submodelElements" : [ {
+      "modelType" : {
+        "name" : "Property"
+      },
+      "idShort" : "SINGLE_ELEMENT"
+    } ]
   }, {
     "modelType" : {
       "name" : "Submodel"
@@ -28,8 +34,24 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_C_fromXML"
+      "id" : "http://demo.org/sm/submodelID_C"
     },
-    "idShort" : "submodelID_C_fromXML"
+    "idShort" : "submodelID_C",
+    "submodelElements" : [ {
+      "modelType" : {
+        "name" : "Property"
+      },
+      "idShort" : "MORE_ELEMENTS_1"
+    }, {
+      "modelType" : {
+        "name" : "Property"
+      },
+      "idShort" : "MORE_ELEMENTS_2"
+    }, {
+      "modelType" : {
+        "name" : "Property"
+      },
+      "idShort" : "MORE_ELEMENTS_3"
+    } ]
   } ]
 }

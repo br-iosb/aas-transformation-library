@@ -32,33 +32,42 @@ public class DemoRunner {
 	private static final String _04_FOREACH = "04_foreach";
 	private static final String _05_DEFINITIONS = "05_definitions";
 	private static final String _06_VARSCOPE = "06_variableScope";
+	private static final String _07_AUTOWIRE = "07_autowire";
+	private static final String[] SCENARIOS = new String[] { _01_FULL_SUPPORT, _02_EXPRESSIONS, _03_VARS, _04_FOREACH,
+			_05_DEFINITIONS, _06_VARSCOPE, _07_AUTOWIRE };
 
 	public static void main(String[] args) throws Exception {
-		String scenarioName = _06_VARSCOPE;
-		
-		Path demoSpace = Paths.get("src/main/resources/demo").toAbsolutePath();
-		Path execDir = demoSpace.resolve(scenarioName);
+		for (String scenarioName : SCENARIOS) {
 
-		Path pathIn = execDir.resolve(IN);
-		Path pathConfig = execDir.resolve(CONFIG);
-		Path pathOut = execDir.resolve(OUT);
+			//use scanrios subfolder
+			Path demoSpace = Paths.get("src/main/resources/demo").toAbsolutePath();
+			Path execDir = demoSpace.resolve(scenarioName);
 
-		try (InputStream inputStream = Files.newInputStream(pathIn, StandardOpenOption.READ)) {
+			// parse config
+			Path pathConfig = execDir.resolve(CONFIG);
 			MappingSpecification mappingSpecification = new MappingSpecificationParser()
 					.loadMappingSpecification(pathConfig.toAbsolutePath().toString());
-			AssetAdministrationShellEnvironment transformationResults = new GenericDocumentTransformer()
-					.execute(inputStream, mappingSpecification);
 
-			try (OutputStream outputStream = Files.newOutputStream(pathOut, StandardOpenOption.CREATE,
-					StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
-				new JsonSerializer().write(outputStream, transformationResults);
-				System.out.println(scenarioName);
-				new JsonSerializer().write(System.out, transformationResults);
+			// transforms xml input
+			Path pathIn = execDir.resolve(IN);
+			try (InputStream inputStream = Files.newInputStream(pathIn, StandardOpenOption.READ)) {
+				AssetAdministrationShellEnvironment transformationResults = new GenericDocumentTransformer()
+						.execute(inputStream, mappingSpecification);
+
+				// writes output
+				Path pathOut = execDir.resolve(OUT);
+				try (OutputStream outputStream = Files.newOutputStream(pathOut, StandardOpenOption.CREATE,
+						StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
+					new JsonSerializer().write(outputStream, transformationResults);
+					System.out.println(scenarioName);
+					new JsonSerializer().write(System.out, transformationResults);
+				}
+
+				// consistent format for better comparison
+				withDefaultFormat(pathConfig);
+				withDefaultFormat(pathOut);
 			}
 		}
-
-		withDefaultFormat(pathConfig);
-		withDefaultFormat(pathOut);
 	}
 
 	private static void withDefaultFormat(Path pathConfig)

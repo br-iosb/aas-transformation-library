@@ -8,9 +8,9 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_A_fromXML"
+      "id" : "http://demo.org/sm/submodelID_A"
     },
-    "idShort" : "submodelID_A_fromXML"
+    "idShort" : "submodelID_A"
   }, {
     "modelType" : {
       "name" : "Submodel"
@@ -18,9 +18,9 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_B_fromXML"
+      "id" : "http://demo.org/sm/submodelID_B"
     },
-    "idShort" : "submodelID_B_fromXML"
+    "idShort" : "submodelID_B"
   }, {
     "modelType" : {
       "name" : "Submodel"
@@ -28,8 +28,8 @@
     "kind" : "Instance",
     "identification" : {
       "idType" : "Iri",
-      "id" : "http://demo.org/sm/submodelID_C_fromXML"
+      "id" : "http://demo.org/sm/submodelID_C"
     },
-    "idShort" : "submodelID_C_fromXML"
+    "idShort" : "submodelID_C"
   } ]
 }

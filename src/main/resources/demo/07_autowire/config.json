@@ -1,0 +1,35 @@
+{
+  "@header" : {
+    "version" : "1.0.0",
+    "aasVersion" : "3.0RC01",
+    "@namespaces" : {
+      "ns" : "http://ns.org/"
+    }
+  },
+  "aasEnvironmentMapping" : {
+    "assetAdministrationShells" : [ {
+      "modelType" : {
+        "name" : "AssetAdministrationShell"
+      },
+      "assetInformation" : {
+        "assetKind" : null
+      },
+      "identification" : {
+        "idType" : "Iri",
+        "id" : "https://demo.org/Test_AssetAdministrationShell"
+      },
+      "idShort" : "Test_AssetAdministrationShell"
+    } ],
+    "submodels" : [ {
+      "modelType" : {
+        "name" : "Submodel"
+      },
+      "kind" : "Instance",
+      "identification" : {
+        "idType" : "Iri",
+        "id" : "https://demo.org/Test_Submodel"
+      },
+      "idShort" : "Test_Submodel"
+    } ]
+  }
+}

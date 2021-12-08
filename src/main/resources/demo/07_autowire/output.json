@@ -1,0 +1,34 @@
+{
+  "assetAdministrationShells" : [ {
+    "modelType" : {
+      "name" : "AssetAdministrationShell"
+    },
+    "assetInformation" : {
+      "assetKind" : null
+    },
+    "submodels" : [ {
+      "keys" : [ {
+        "idType" : "Custom",
+        "type" : "Submodel",
+        "value" : "https://demo.org/Test_Submodel"
+      } ]
+    } ],
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "https://demo.org/Test_AssetAdministrationShell"
+    },
+    "idShort" : "Test_AssetAdministrationShell"
+  } ],
+  "conceptDescriptions" : [ ],
+  "submodels" : [ {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "https://demo.org/Test_Submodel"
+    },
+    "idShort" : "Test_Submodel"
+  } ]
+}

@@ -219,47 +219,40 @@
         } ]
       },
       "dataSpecificationContent" : {
-        "sourceOfDefinition" : "http://acplt.org/DataSpec/ExampleDef",
-        "dataType" : "RealMeasure",
-        "valueList" : {
-          "valueReferencePairTypes" : [ {
-            "valueId" : {
-              "keys" : [ {
-                "idType" : "Iri",
-                "value" : "http://acplt.org/ValueId/ExampleValueId",
-                "type" : "GlobalReference"
-              } ]
-            },
-            "value" : "http://acplt.org/ValueId/ExampleValueId"
-          }, {
-            "valueId" : {
-              "keys" : [ {
-                "idType" : "Iri",
-                "value" : "http://acplt.org/ValueId/ExampleValueId2",
-                "type" : "GlobalReference"
-              } ]
-            },
-            "value" : "http://acplt.org/ValueId/ExampleValueId2"
-          } ]
-        },
-        "unit" : "SpaceUnit",
+        "value" : "TEST",
         "symbol" : "SU",
+        "dataType" : "RealMeasure",
+        "unit" : "SpaceUnit",
         "unitId" : {
           "keys" : [ {
-            "idType" : "Iri",
             "value" : "http://acplt.org/Units/SpaceUnit",
-            "type" : "GlobalReference"
+            "type" : "GlobalReference",
+            "idType" : "Iri"
           } ]
         },
         "valueFormat" : "string",
-        "value" : "TEST",
-        "preferredName" : [ {
-          "language" : "de",
-          "text" : "Test Specification"
-        }, {
-          "language" : "en-us",
-          "text" : "TestSpecification"
-        } ],
+        "sourceOfDefinition" : "http://acplt.org/DataSpec/ExampleDef",
+        "valueList" : {
+          "valueReferencePairTypes" : [ {
+            "value" : "http://acplt.org/ValueId/ExampleValueId",
+            "valueId" : {
+              "keys" : [ {
+                "value" : "http://acplt.org/ValueId/ExampleValueId",
+                "type" : "GlobalReference",
+                "idType" : "Iri"
+              } ]
+            }
+          }, {
+            "value" : "http://acplt.org/ValueId/ExampleValueId2",
+            "valueId" : {
+              "keys" : [ {
+                "value" : "http://acplt.org/ValueId/ExampleValueId2",
+                "type" : "GlobalReference",
+                "idType" : "Iri"
+              } ]
+            }
+          } ]
+        },
         "definition" : [ {
           "language" : "de",
           "text" : "Dies ist eine Data Specification fÃ¼r Testzwecke"
@@ -267,14 +260,21 @@
           "language" : "en-us",
           "text" : "This is a DataSpecification for testing purposes"
         } ],
-        "levelType" : [ "Min", "Max" ],
         "shortName" : [ {
           "language" : "de",
           "text" : "Test Spec"
         }, {
           "language" : "en-us",
           "text" : "TestSpec"
-        } ]
+        } ],
+        "preferredName" : [ {
+          "language" : "de",
+          "text" : "Test Specification"
+        }, {
+          "language" : "en-us",
+          "text" : "TestSpecification"
+        } ],
+        "levelType" : [ "Min", "Max" ]
       }
     } ],
     "administration" : {
