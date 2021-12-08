@@ -1,0 +1,37 @@
+{
+	"@header": {
+		"version": "1.0.0",
+		"aasVersion": "3.0RC01",
+		"@namespaces": {
+			"ns": "http://ns.org/"
+		}
+	},
+	"aasEnvironmentMapping": {
+		"submodels": [
+			{
+				"modelType": {
+					"name": "Submodel"
+				},
+				"kind": "Instance",
+				"identification": {
+					"idType": "Iri",
+					"@bind": {
+						"id": {
+							"@concatenate": [
+								"http://demo.org/sm/",
+								{
+									"@xpath": "/ns:root/ns:submodel/@id"
+								}
+							]
+						}
+					}
+				},
+				"@bind": {
+					"idShort": {
+						"@xpath": "/ns:root/ns:submodel/@id"
+					}
+				}
+			}
+		]
+	}
+}

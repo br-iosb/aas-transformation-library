@@ -1,0 +1,40 @@
+{
+  "@header" : {
+    "version" : "1.0.0",
+    "aasVersion" : "3.0RC01",
+    "@namespaces" : {
+      "ns" : "http://ns.org/"
+    },
+    "@variables" : {
+      "idprefix" : "http://demo.org/sm/"
+    }
+  },
+  "aasEnvironmentMapping" : {
+    "submodels" : [ {
+      "@foreach" : {
+        "@xpath" : "/ns:root/ns:submodel"
+      },
+      "modelType" : {
+        "name" : "Submodel"
+      },
+      "kind" : "Instance",
+      "identification" : {
+        "idType" : "Iri",
+        "@bind" : {
+          "id" : {
+            "@concatenate" : [ {
+              "@var" : "idprefix"
+            }, {
+              "@xpath" : "@id"
+            } ]
+          }
+        }
+      },
+      "@bind" : {
+        "idShort" : {
+          "@xpath" : "@id"
+        }
+      }
+    } ]
+  }
+}

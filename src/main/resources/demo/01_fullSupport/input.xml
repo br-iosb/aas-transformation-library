@@ -1,2 +1,3 @@
-<ns:empty xmlns:ns="http://ns.org/" targetNamespace="http://ns.org/">
+<ns:empty xmlns:ns="http://ns.org/"
+	targetNamespace="http://ns.org/">
 </ns:empty>

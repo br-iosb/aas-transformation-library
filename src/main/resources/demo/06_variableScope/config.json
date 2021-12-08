@@ -1,0 +1,74 @@
+{
+  "@header" : {
+    "version" : "1.0.0",
+    "aasVersion" : "3.0RC01",
+    "@namespaces" : {
+      "ns" : "http://ns.org/"
+    },
+    "@variables" : {
+      "idprefix" : "http://demo.org/sm/"
+    },
+    "@definitions" : {
+      "idgen" : {
+        "@concatenate" : [ {
+          "@var" : "idprefix"
+        }, {
+          "@xpath" : "@id"
+        } ]
+      }
+    }
+  },
+  "aasEnvironmentMapping" : {
+    "submodels" : [ {
+      "@foreach" : {
+        "@xpath" : "/ns:root/ns:submodel"
+      },
+      "modelType" : {
+        "name" : "Submodel"
+      },
+      "kind" : "Instance",
+      "identification" : {
+        "@variables" : {
+          "idprefix" : "http://demo.org/sm/"
+        },
+        "idType" : "Iri",
+        "@bind" : {
+          "id" : {
+            "@def" : "idgen"
+          }
+        }
+      },
+      "@bind" : {
+        "idShort" : {
+          "@xpath" : "@id"
+        }
+      }
+    }, {
+      "@foreach" : {
+        "@xpath" : "/ns:root/ns:special"
+      },
+      "modelType" : {
+        "name" : "Submodel"
+      },
+      "kind" : "Instance",
+      "identification" : {
+        "@variables" : {
+          "idprefix" : {
+            "@xpath" : "@organisation"
+          }
+        },
+        "idType" : "Iri",
+        "@bind" : {
+          "id" : {
+            "@def" : "idgen"
+          }
+        }
+      },
+      "@bind" : {
+        "idShort" : {
+          "@xpath" : "@id"
+        }
+      }
+    } ]
+  }
+}

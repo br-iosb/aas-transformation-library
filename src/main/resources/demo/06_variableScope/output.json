@@ -1,0 +1,45 @@
+{
+  "assetAdministrationShells" : [ ],
+  "conceptDescriptions" : [ ],
+  "submodels" : [ {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "http://demo.org/sm/submodelID_A"
+    },
+    "idShort" : "submodelID_A"
+  }, {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "http://demo.org/sm/submodelID_B"
+    },
+    "idShort" : "submodelID_B"
+  }, {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "http://demo.org/sm/submodelID_C"
+    },
+    "idShort" : "submodelID_C"
+  }, {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "http://special.org/sm/submodel_special"
+    },
+    "idShort" : "submodel_special"
+  } ]
+}

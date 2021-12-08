@@ -1,0 +1,15 @@
+{
+  "assetAdministrationShells" : [ ],
+  "conceptDescriptions" : [ ],
+  "submodels" : [ {
+    "modelType" : {
+      "name" : "Submodel"
+    },
+    "kind" : "Instance",
+    "identification" : {
+      "idType" : "Iri",
+      "id" : "http://demo.org/sm/submodelIDfromXML"
+    },
+    "idShort" : "submodelIDfromXML"
+  } ]
+}
