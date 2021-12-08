@@ -219,46 +219,46 @@
         } ]
       },
       "dataSpecificationContent" : {
-        "value" : "TEST",
-        "valueFormat" : "string",
-        "symbol" : "SU",
-        "unit" : "SpaceUnit",
-        "unitId" : {
-          "keys" : [ {
-            "value" : "http://acplt.org/Units/SpaceUnit",
-            "type" : "GlobalReference",
-            "idType" : "Iri"
-          } ]
-        },
-        "dataType" : "RealMeasure",
         "sourceOfDefinition" : "http://acplt.org/DataSpec/ExampleDef",
+        "dataType" : "RealMeasure",
         "valueList" : {
           "valueReferencePairTypes" : [ {
-            "value" : "http://acplt.org/ValueId/ExampleValueId",
             "valueId" : {
               "keys" : [ {
+                "idType" : "Iri",
                 "value" : "http://acplt.org/ValueId/ExampleValueId",
-                "type" : "GlobalReference",
-                "idType" : "Iri"
+                "type" : "GlobalReference"
               } ]
-            }
+            },
+            "value" : "http://acplt.org/ValueId/ExampleValueId"
           }, {
-            "value" : "http://acplt.org/ValueId/ExampleValueId2",
             "valueId" : {
               "keys" : [ {
+                "idType" : "Iri",
                 "value" : "http://acplt.org/ValueId/ExampleValueId2",
-                "type" : "GlobalReference",
-                "idType" : "Iri"
+                "type" : "GlobalReference"
               } ]
-            }
+            },
+            "value" : "http://acplt.org/ValueId/ExampleValueId2"
           } ]
         },
-        "shortName" : [ {
+        "unit" : "SpaceUnit",
+        "symbol" : "SU",
+        "unitId" : {
+          "keys" : [ {
+            "idType" : "Iri",
+            "value" : "http://acplt.org/Units/SpaceUnit",
+            "type" : "GlobalReference"
+          } ]
+        },
+        "valueFormat" : "string",
+        "value" : "TEST",
+        "preferredName" : [ {
           "language" : "de",
-          "text" : "Test Spec"
+          "text" : "Test Specification"
         }, {
           "language" : "en-us",
-          "text" : "TestSpec"
+          "text" : "TestSpecification"
         } ],
         "definition" : [ {
           "language" : "de",
@@ -268,12 +268,12 @@
           "text" : "This is a DataSpecification for testing purposes"
         } ],
         "levelType" : [ "Min", "Max" ],
-        "preferredName" : [ {
+        "shortName" : [ {
           "language" : "de",
-          "text" : "Test Specification"
+          "text" : "Test Spec"
         }, {
           "language" : "en-us",
-          "text" : "TestSpecification"
+          "text" : "TestSpec"
         } ]
       }
     } ],

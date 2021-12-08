@@ -1,5 +1,6 @@
 package demo;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -7,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.sap.dsc.aas.lib.mapping.MappingSpecificationParser;
 import com.sap.dsc.aas.lib.mapping.model.MappingSpecification;
@@ -44,10 +48,15 @@ public class DemoRunner {
 				new JsonSerializer().write(outputStream, transformationResults);
 			}
 		}
-		
-		//consistentFormat();
-//		new JsonMapper().readTree(Files.newInputStream(pathOut, StandardOpenOption.))
 
+		withDefaultFormat(pathConfig);
+		withDefaultFormat(pathOut);
+	}
+
+	private static void withDefaultFormat(Path pathConfig)
+			throws IOException, JsonGenerationException, JsonMappingException {
+		JsonNode readTree = new JsonMapper().readTree(Files.newInputStream(pathConfig, StandardOpenOption.READ));
+		new JsonMapper().writerWithDefaultPrettyPrinter().writeValue(pathConfig.toFile(), readTree);
 	}
 
 }
